@@ -1,0 +1,28 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible"
+		  content="IE=edge">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0">
+	<title>Socket.io test</title>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		const socket = io('http://localhost:5010');
+		socket.on('greeting from server', (message) => {
+			// document.body.appendChild(
+			// 	document.createTextNode(message.greeting)
+			// );
+			socket.emit('greeting-from-client', {
+				greeting: 'Hello Server'
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
