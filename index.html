@@ -10,13 +10,29 @@
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
 		const socket = io('http://localhost:5010');
-		socket.on('greeting from server', (message) => {
-			// document.body.appendChild(
-			// 	document.createTextNode(message.greeting)
-			// );
+		socket.on('greeting-from-server', (message) => {
+			const div = document.createElement('div');
+			div.appendChild(
+				document.createTextNode(message.greeting)
+			);
+			document.body.appendChild(div);
 			socket.emit('greeting-from-client', {
 				greeting: 'Hello Server'
 			});
+		});
+		socket.on('server-broadcast-message', (message) => {
+			const div = document.createElement('div');
+			div.appendChild(
+				document.createTextNode(message.greeting)
+			);
+			document.body.appendChild(div);
+		});
+		socket.on('server-reminder', (message) => {
+			const div = document.createElement('div');
+			div.appendChild(
+				document.createTextNode(message.greeting)
+			);
+			document.body.appendChild(div);
 		});
 	</script>
 </head>

@@ -21,9 +21,20 @@ const io = new socketIO(server);
 
 io.on('connection', (socket) => {
 	socket.emit('greeting-from-server', {
-		greeting: 'hello client'
+		greeting: 'you loaded the page '
+	});
+	socket.broadcast.emit('server-broadcast-message', {
+		greeting: 'NEW CLIENT CONNNECTED '
 	});
 	socket.on('greeting-from-client', (message) => {
-		console.log(message);
-	})
+		console.log('client connected: ' + message.greeting);
+	});
+	setInterval(() => {
+		var d = new Date();
+		var currentTime = d.toLocaleTimeString();
+		socket.broadcast.emit('server-reminder', {
+			greeting: 'a 10-second reminder: ' + currentTime
+		});
+		console.log('10-second reminder: ' + currentTime );
+	}, 10000);
 });
